@@ -1,7 +1,14 @@
 import numpy as np
 
 def load_projection_matrix(filepath):
-    return np.fromfile(filepath, dtype=np.float32).reshape(128, 96)
+
+    data = np.fromfile(filepath, dtype=np.float32)
+
+    # Skip first 32 metadata values
+    matrix_data = data[32:32 + 128 * 96]
+
+    # Reshape to 128x96
+    return matrix_data.reshape((128, 96))
 
 def compute_hash_from_embedding(embedding_128, projection_matrix):
     projected = np.dot(embedding_128, projection_matrix)  # Result is (96,)
