@@ -104,7 +104,8 @@ class FaceHashApp:
         h1, h2 = upload_hashes
         e1, e2 = upload_embeddings
         if h1 and h2 and e1 is not None and e2 is not None:
-            hamming_dist = sum(c1 != c2 for c1, c2 in zip(h1, h2))
+            dissimilar_bits = sum(c1 != c2 for c1, c2 in zip(h1, h2))
+            hamming_dist = 1 - (dissimilar_bits / 96)
             cosine_sim = float(np.dot(e1, e2) / (np.linalg.norm(e1) * np.linalg.norm(e2)))
             self.result_label.config(
                 text=f"🧮 Hamming Distance: {hamming_dist}\n📐 Cosine Similarity: {cosine_sim:.4f}"
