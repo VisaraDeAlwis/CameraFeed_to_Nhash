@@ -3,7 +3,7 @@ import json
 import random
 import warnings
 from tqdm import tqdm
-import numpy as np
+import random
 import cv2
 
 from modules.embedding_extractor import extract_embedding
